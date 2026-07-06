@@ -1,0 +1,21 @@
+/* Prime Intellect Clone Custom Stylesheet */
+:root {
+    color-scheme: dark;
+}
+
+body {
+    background-color: #050505;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Ensure background parallax video takes full container space smoothly */
+.hero-video-edge-blend {
+    background-color: #050505;
+}
+
+/* Apply backdrop-blur styling stability for navigation links and buttons */
+header a, header button {
+    transition: all 0.2s ease-in-out;
+}
