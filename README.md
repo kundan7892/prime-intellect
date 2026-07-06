@@ -1,32 +1,44 @@
-# Prime Intellect Hero Section Clone
+# Prime Intellect Hero Section - Next.js Clone
 
-A high-fidelity, pixel-perfect frontend clone of the navigation header and hero section from [Prime Intellect](https://www.primeintellect.ai/). This project is built using pure HTML, Vanilla CSS, and custom JavaScript, leveraging the website's original assets and fonts.
+A high-fidelity, pixel-perfect clone of the navigation header and hero section from [Prime Intellect](https://www.primeintellect.ai/), built as a modern **Next.js (App Router)** application. 
+
+This project uses the original brand assets, CSS files, and web fonts to achieve an identical frontend replica.
 
 ## Features
 
-- **Pristine Visual Fidelity**: Replicated layout, color hierarchy, and grid spacing exactly using the compiled original stylesheets.
+- **Next.js Framework**: Migrated to Next.js App Router with modular layout.
+- **Pristine Visual Fidelity**: Replicated layout, color hierarchy, and grid spacing exactly using the precompiled original stylesheets.
 - **Interactive Logo Grid**: Implemented hover states on the partner grid, including the Zapier/Ramp case study badges and the custom flying gif hover mask for Flapping Airplanes.
 - **Micro-Animations**: Custom CSS translation transitions on buttons (sliding double-arrow hover effect) and header links.
 - **Parallax Background**: Smooth scroll listener script driving the CSS translation variable (`--hero-parallax-y`) for the background loop video.
 - **Local Web Fonts**: Preloaded custom typography (`ABC Favorit Mono` and `OCR X`) to prevent Layout Shift and preserve brand styling.
 
-## Directory Structure
+## Project Structure
 
 ```text
-├── _next/               # Preloaded fonts and stylesheets
-├── backgrounds/         # Glass loop poster and videos
-├── css/                 # Normalization overrides stylesheet
-├── fonts/               # Custom ABC Favorit & OCR brand typography
-├── icons/               # SVGs, icons, and partner logo directory
-├── index.html           # Main cloned markup page
-├── server.js            # Node.js static server
-└── README.md            # Repository documentation
+├── src/
+│   └── app/
+│       ├── styles/
+│       │   ├── 415672b643d6b238.css   # Main layout and animation styles
+│       │   ├── 7ca52951e73d16f6.css   # Brand variables and utility styles
+│       │   └── site.css               # Normalization overrides
+│       ├── layout.js                  # Root Next.js Layout with font config and CSS imports
+│       └── page.js                    # Compiled Home component in JSX format
+├── public/
+│   ├── _next/static/media/            # Absolute path mapped brand woff2 fonts
+│   ├── backgrounds/                   # Parallax backdrop videos and posters
+│   ├── fonts/                         # Custom ABC Favorit brand typography
+│   └── icons/                         # Brand logos & 10 partner SVGs (including flapping airplanes gif)
+├── package.json                       # Next.js npm dependencies
+├── jsconfig.json                      # Next.js path configs
+├── next.config.mjs                    # Next.js configurations
+└── postcss.config.mjs                 # PostCSS config
 ```
 
 ## Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) installed locally.
+- [Node.js](https://nodejs.org/) (v18.0 or newer) installed locally.
 
 ### Installation & Run
 
@@ -36,10 +48,15 @@ A high-fidelity, pixel-perfect frontend clone of the navigation header and hero 
    cd <project-folder>
    ```
 
-2. Start the zero-dependency dev server:
+2. Install dependencies:
    ```bash
-   node server.js
+   npm install
    ```
 
-3. Open your browser and navigate to:
+3. Start the Next.js development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to:
    [http://localhost:3000](http://localhost:3000)
