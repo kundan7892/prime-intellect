@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
         <link rel="preload" href="/fonts/ABCFavoritMono-Regular-Trial.woff2" as="font" crossOrigin="" type="font/woff2" />
         <link rel="preload" href="/fonts/ABCFavoritMono-Bold-Trial.woff2" as="font" crossOrigin="" type="font/woff2" />
       </head>
-      <body className="__variable_bd525c __variable_3bed08 antialiased bg-black text-white selection:bg-white/20 selection:text-white">
+      <body className="__variable_bd525c __variable_3bed08 antialiased bg-black text-white selection:bg-white/20 selection:text-white overflow-x-hidden">
         {children}
       </body>
     </html>
