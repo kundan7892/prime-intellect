@@ -3,26 +3,34 @@
 import { useEffect, useRef, useState } from "react";
 
 
+
 function FooterCanvas({ text }) {
     const canvasRef = useRef(null);
     const mouseRef = useRef(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        const parent = canvas?.parentElement;
-        if (!canvas || !parent) return;
+        if (!canvas) return;
+        
+        const parent = canvas.parentElement;
+        if (!parent) return;
 
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
         let particles = [];
         let animationFrameId = 0;
+        let isInitialized = false;
 
         const init = () => {
-            const { width, height } = parent.getBoundingClientRect();
+            const rect = parent.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            if (width === 0 || height === 0) return;
+
             const dpr = window.devicePixelRatio || 1;
-            const w = Math.max(1, Math.floor(width));
-            const h = Math.max(1, Math.floor(height));
+            const w = Math.floor(width);
+            const h = Math.floor(height);
 
             canvas.width = w * dpr;
             canvas.height = h * dpr;
@@ -56,7 +64,8 @@ function FooterCanvas({ text }) {
 
             for (let y = 0; y < h; y += step) {
                 for (let x = 0; x < w; x += step) {
-                    if (imgData[(y * w + x) * 4 + 3] > 80) {
+                    const alphaIdx = (y * w + x) * 4 + 3;
+                    if (imgData[alphaIdx] > 80) {
                         newParticles.push({
                             x: x + (Math.random() - 0.5) * 10,
                             y: y + (Math.random() - 0.5) * 10,
@@ -68,51 +77,68 @@ function FooterCanvas({ text }) {
                 }
             }
             particles = newParticles;
+            isInitialized = true;
         };
 
         const animate = () => {
-            const { width, height } = parent.getBoundingClientRect();
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = "rgba(255, 255, 255, 0.32)";
+            const rect = parent.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            if (width > 0 && height > 0) {
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = "rgba(255, 255, 255, 0.32)";
 
-            particles.forEach((p) => {
-                let forceX = 0;
-                let forceY = 0;
-                const mouse = mouseRef.current;
+                particles.forEach((p) => {
+                    let forceX = 0;
+                    let forceY = 0;
+                    const mouse = mouseRef.current;
 
-                if (mouse) {
-                    const dx = p.targetX - mouse.x;
-                    const dy = p.targetY - mouse.y;
-                    const dist = Math.hypot(dx, dy);
-                    if (dist < 82 && dist > 0) {
-                        const strength = (1 - dist / 82) * 28;
-                        forceX = (dx / dist) * strength;
-                        forceY = (dy / dist) * strength;
+                    if (mouse) {
+                        const dx = p.targetX - mouse.x;
+                        const dy = p.targetY - mouse.y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < 82 && dist > 0) {
+                            const strength = (1 - dist / 82) * 28;
+                            forceX = (dx / dist) * strength;
+                            forceY = (dy / dist) * strength;
+                        }
                     }
-                }
 
-                p.x += (p.targetX + forceX - p.x) * 0.16;
-                p.y += (p.targetY + forceY - p.y) * 0.16;
-                ctx.globalAlpha = mouseRef.current ? 1 : 0.86;
-                ctx.fillRect(p.x, p.y, p.size, p.size);
-            });
+                    p.x += (p.targetX + forceX - p.x) * 0.16;
+                    p.y += (p.targetY + forceY - p.y) * 0.16;
+                    ctx.globalAlpha = mouseRef.current ? 1 : 0.86;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                });
 
-            ctx.globalAlpha = 1;
+                ctx.globalAlpha = 1;
+            }
             animationFrameId = window.requestAnimationFrame(animate);
         };
 
-        const handleResize = () => {
-            init();
-        };
+        // ResizeObserver to handle dimensions changes and trigger init cleanly
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+                const { width, height } = entry.contentRect;
+                if (width > 0 && height > 0) {
+                    init();
+                }
+            }
+        });
+        resizeObserver.observe(parent);
 
-        document.fonts.ready.then(init);
+        // Ensure init runs when fonts are loaded
+        if (typeof document !== 'undefined' && document.fonts) {
+            document.fonts.ready.then(() => {
+                init();
+            });
+        }
+
         init();
         animate();
 
-        window.addEventListener("resize", handleResize);
         return () => {
+            resizeObserver.disconnect();
             window.cancelAnimationFrame(animationFrameId);
-            window.removeEventListener("resize", handleResize);
         };
     }, [text]);
 
@@ -136,6 +162,7 @@ function FooterCanvas({ text }) {
         </div>
     );
 }
+
 
 export default function Home() {
     const [activeHeaderHover, setActiveHeaderHover] = useState(null);
