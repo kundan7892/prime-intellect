@@ -19,3 +19,20 @@ body {
 header a, header button {
     transition: all 0.2s ease-in-out;
 }
+
+/* Centered main layout container to align with header max-width */
+main {
+    max-width: 90rem; /* 1440px (max-w-360) */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    main {
+        padding-left: 1.25rem; /* px-5 */
+        padding-right: 1.25rem;
+    }
+}
