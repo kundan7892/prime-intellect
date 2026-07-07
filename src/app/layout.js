@@ -24,10 +24,17 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
+      <head>
+        <link rel="preload" href="/fonts/22a5144ee8d83bca-s.p.woff2" as="font" crossOrigin="" type="font/woff2" />
+        <link rel="preload" href="/fonts/7d4881bb7e1bf84d-s.p.woff2" as="font" crossOrigin="" type="font/woff2" />
+        <link rel="preload" href="/fonts/ABCFavoritMono-Regular-Trial.woff2" as="font" crossOrigin="" type="font/woff2" />
+        <link rel="preload" href="/fonts/ABCFavoritMono-Bold-Trial.woff2" as="font" crossOrigin="" type="font/woff2" />
+      </head>
       <body className="__variable_bd525c __variable_3bed08 antialiased bg-black text-white selection:bg-white/20 selection:text-white">
         {children}
       </body>
     </html>
   );
 }
+
 
