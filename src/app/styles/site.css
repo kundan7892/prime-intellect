@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #050505;
+    background-color: #0e0e0e;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -12,7 +12,7 @@ body {
 
 /* Ensure background parallax video takes full container space smoothly */
 .hero-video-edge-blend {
-    background-color: #050505;
+    background-color: #0e0e0e;
 }
 
 /* Apply backdrop-blur styling stability for navigation links and buttons */
