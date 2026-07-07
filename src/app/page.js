@@ -192,7 +192,36 @@ export default function Home() {
 
     return (
         <>
-            <header data-site-header="true" data-header-theme="dark" className="fixed top-0 left-0 right-0 z-50 transition-colors duration-200 bg-transparent"><div className="relative z-100 mx-auto flex h-16 max-w-360 items-center justify-between bg-transparent px-4 transition-colors duration-200 md:px-5"><a className="flex items-center shrink-0" href="/"><img alt="PRIME Intellect" width="240" height="32" decoding="async" data-nimg="1" className="h-8 w-auto transition-[filter] duration-200" style={{color: "transparent"}} src="/icons/primeintellect-logo.svg"/></a><div className="hidden xl:flex items-center gap-5 flex-1 justify-end min-[1400px]:justify-between ml-5"><div className="flex items-center gap-5"><div className="flex items-center gap-1">
+            <header data-site-header="true" data-header-theme="dark" className="fixed top-0 left-0 right-0 z-50 transition-colors duration-200 bg-transparent"><div className="relative z-100 mx-auto flex h-16 max-w-360 items-center justify-between bg-transparent px-4 transition-colors duration-200 md:px-5"><a className="flex items-center shrink-0" href="/"><img alt="PRIME Intellect" width="240" height="32" decoding="async" data-nimg="1" className="h-8 w-auto transition-[filter] duration-200" style={{color: "transparent"}} src="/icons/primeintellect-logo.svg"/></a><div className="hidden xl:flex items-center gap-5 flex-1 justify-between ml-5">
+                        <nav className="flex items-center">
+                            <a className="group flex h-7.5 w-45 items-center justify-between px-3 font-favorit text-xs transition-colors duration-150 border border-white/10 bg-black/35 text-white hover:bg-white/10" 
+                               onMouseEnter={() => setActiveHeaderHover('lab')} 
+                               onMouseLeave={() => setActiveHeaderHover(null)} 
+                               href="/#lab"
+                            >
+                                <span className="uppercase">LAB</span>
+                                <span className="transition-colors text-white/30 group-hover:text-white/50 text-2xs">01</span>
+                            </a>
+                            <a className="group flex h-7.5 w-45 items-center justify-between px-3 font-favorit text-xs transition-colors duration-150 border-t border-b border-r border-white/10 bg-black/35 text-white hover:bg-white/10" 
+                               onMouseEnter={() => setActiveHeaderHover('compute')} 
+                               onMouseLeave={() => setActiveHeaderHover(null)} 
+                               href="/#compute"
+                            >
+                                <span className="uppercase">COMPUTE</span>
+                                <span className="transition-colors text-white/30 group-hover:text-white/50 text-2xs">02</span>
+                            </a>
+                            <a className="group flex h-7.5 w-45 items-center justify-between px-3 font-favorit text-xs transition-colors duration-150 border-t border-b border-r border-white/10 bg-black/35 text-white hover:bg-white/10" 
+                               onMouseEnter={() => setActiveHeaderHover('research')} 
+                               onMouseLeave={() => setActiveHeaderHover(null)} 
+                               href="/#research"
+                            >
+                                <span className="uppercase">RESEARCH</span>
+                                <span className="transition-colors text-white/30 group-hover:text-white/50 text-2xs">03</span>
+                            </a>
+                        </nav>
+                        
+                        <div className="flex items-center gap-5 ml-auto">
+                            <div className="flex items-center gap-1">
                                 <a className="px-2.5 py-2 font-favorit text-xs leading-none uppercase backdrop-blur-md transition-colors bg-black/35 text-white/80 hover:bg-black/55 hover:text-white" href="https://docs.primeintellect.ai/introduction">Docs</a>
                                 <a className="px-2.5 py-2 font-favorit text-xs leading-none uppercase backdrop-blur-md transition-colors bg-black/35 text-white/80 hover:bg-black/55 hover:text-white" href="/blog">Blog</a>
                                 <a className="px-2.5 py-2 font-favorit text-xs leading-none uppercase backdrop-blur-md transition-colors bg-black/35 text-white/80 hover:bg-black/55 hover:text-white group flex items-center gap-1" href="https://jobs.ashbyhq.com/PrimeIntellect">
